@@ -1,0 +1,13 @@
+faiss-cpu
+sentence-transformers
+transformers
+torch
+numpy
+llama-cpp-python>=0.3.2
+pdfplumber
+python-docx
+markdown
+beautifulsoup4
+gradio
+requests
+matplotlib

@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+index/
+models/
+.env
+data/patient.db
+data/pmc/*
+data/pubmed/*
