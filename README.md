@@ -32,8 +32,23 @@
 
 **Who built it and why:**
 
-``` Maintainer: Prakhar Rampalli```
+ **Built by Prakhar Rampalli**: [linkedin.com/in/prakhar-rampalli](https://linkedin.com/in/prakhar-rampalli)
 - This project was built to make specialist-level medical literature accessible to the people who need it most, at no cost and with no ongoing subscription.
+
+*Ingesting PubMed abstracts via CLI*
+![alt text](PV_CMD.png)
+
+*Plain-English question answered with source links*
+![alt text](PV_QA.png)
+
+*Contradiction flags when retrieved papers disagree*
+![alt text](PV_Contradictions.png)
+
+*Daily health log with food-to-literature cross-reference*
+![alt text](PV_Trigger_log.png)
+
+*Flare correlation chart: foods appearing before flares*
+![alt text](PV_Symptom_Timeline.png)
 
 ---
 
@@ -49,27 +64,18 @@
 - **Contradiction detector** that surfaces conflicting claims across retrieved sources
 - Ask questions using a **local LLM** (Mistral 7B Instruct GGUF): no API keys
 - **Streaming Gradio UI** with three tabs: Q&A, Trigger Log, Symptom Timeline
-- **Personal health log** stored in local SQLite — foods, activities, skin score per day
+- **Personal health log** stored in local SQLite: foods, activities, skin score per day
 - **Food-to-literature cross-reference**: links your logged foods to relevant PV papers
 - **Symptom timeline** with pre-flare correlation chart
 - CLI interface for power users
 - 100% offline after initial fetch and model download
-
 ---
 
 ## Why Not Just Use LangChain or LlamaIndex?
 
-```
 - LangChain and LlamaIndex are excellent frameworks, but they hide the details: you chain components together without necessarily understanding what each one does.
 - This project was built from scratch deliberately: each component (chunking, embedding, FAISS indexing, reranking, prompt construction) is implemented individually so the full pipeline is transparent and debuggable.
 - There are no hidden defaults, no black-box retrieval methods, and no framework doing things behind the scenes. Everything is clear. If something goes wrong, you can trace the exact step in the pipeline where it failed.
-```
-
-![alt text](PV_CMD.png)
-![alt text](PV_QA.png)
-![alt text](PV_Contradictions.png)
-![alt text](PV_Trigger_log.png)
-![alt text](PV_Symptom_Timeline.png)
 
 ## Project Structure
 
@@ -182,7 +188,7 @@ If your filename differs, update `model_path` in `llm.py`.
 
 ## Usage
 
-### Step 1 — Fetch PV literature from NCBI (one time, internet required)
+### Step 1: Fetch PV literature from NCBI (one time, internet required)
 
 ```bash
 set NCBI_EMAIL=you@example.com        # Windows
@@ -196,7 +202,7 @@ python fetch_data.py --pmc            # full text only (~3,000 OA papers)
 - This saves files to `data/pubmed/` and `data/pmc/`. 
 - Re-run periodically to pull new publications. Already-downloaded files are skipped automatically.
 
-### Step 2 — Build the search index
+### Step 2: Build the search index
 
 ```bash
 python main.py ingest data/
@@ -209,7 +215,7 @@ python main.py ingest data/
 - Builds FAISS index (flat for small sets, IVFPQ for large ones)
 - Saves index and metadata to `index/`
 
-### Step 3 — Use the app (fully offline from here)
+### Step 3: Use the app (fully offline from here)
 
 #### Option A: Gradio Web UI
 
